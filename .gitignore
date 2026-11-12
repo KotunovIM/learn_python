@@ -1,0 +1,11 @@
+# Build outputs
+CheckListApp/bin/
+CheckListApp/obj/
+
+# User-specific files
+CheckListApp/.vs/
+*.user
+*.suo
+
+# OS-generated files
+.DS_Store
