@@ -1,6 +1,11 @@
 # Build outputs
+CheckListApp/.vs/
 CheckListApp/bin/
 CheckListApp/obj/
+
+checklist4/CheckListApp/.vs/
+checklist4/CheckListApp/bin/
+checklist4/CheckListApp/obj/
 
 # User-specific files
 CheckListApp/.vs/
