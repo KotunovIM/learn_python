@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CheckListApp.Views.OperationsPage"
+             Title="РћРїРµСЂР°С†РёРё"
+             BackgroundColor="{StaticResource Bg}">
+    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,Auto" Padding="12" RowSpacing="8">
+        <Label Grid.Row="0" Text="Операции" Style="{StaticResource SectionHeader}"/>
+        <Border Grid.Row="1" BackgroundColor="White" StrokeShape="RoundRectangle 8" Stroke="#DCDDE1">
+            <CollectionView x:Name="CvOperations" SelectionMode="Single"
+                            SelectionChanged="CvOperations_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="12,10" ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="{Binding Name}" FontSize="15" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Actions.Count}" FontSize="12"
+                                   TextColor="{StaticResource TextMuted}" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+        <HorizontalStackLayout Grid.Row="2" Spacing="6">
+            <Button Text="+ Операция" Clicked="AddOperation_Click"/>
+            <Button Text="− Удалить" Clicked="DelOperation_Click"/>
+            <Button Text="▶ Выполнить" Style="{StaticResource PrimaryBtn}" Clicked="RunOperation_Click"/>
+        </HorizontalStackLayout>
+        <Label Grid.Row="3" x:Name="LblActionsHeader" Text="Действия операции" Style="{StaticResource SectionHeader}"/>
+        <Border Grid.Row="4" BackgroundColor="White" StrokeShape="RoundRectangle 8" Stroke="#DCDDE1" HeightRequest="220">
+            <CollectionView x:Name="CvActions" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Padding="12,8" Text="{Binding .}" FontSize="14"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+        <HorizontalStackLayout Grid.Row="5" Spacing="6">
+            <Button Text="+ Действие" Clicked="AddAction_Click"/>
+            <Button Text="− Действие" Clicked="DelAction_Click"/>
+        </HorizontalStackLayout>
+            <Button x:Name="BtnLog" Text="📋 Журнал" Clicked="OpenLog_Click"
+                Grid.Row="5" HorizontalOptions="End" WidthRequest="110"/>
+    </Grid>
+</ContentPage>
