@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AndroidApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:AndroidApp.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="CheckListApp">
+
+    <ShellContent
+        Title="Dashboard"
+        ContentTemplate="{DataTemplate pages:MainPage}"
+        Route="main"
+        SemanticProperties.Description="Dashboard"
+        SemanticProperties.Hint="Navigate to dashboard"/>
+
+    <ShellContent
+        Title="Projects"
+        ContentTemplate="{DataTemplate pages:ProjectListPage}"
+        Route="projects"
+        SemanticProperties.Description="Projects"
+        SemanticProperties.Hint="Navigate to projects"/>
+
+    <ShellContent
+        Title="Manage Meta"
+        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
+        Route="manage"
+        SemanticProperties.Description="Manage Meta"
+        SemanticProperties.Hint="Navigate to manage meta"/>
+
+</Shell>

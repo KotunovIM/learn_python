@@ -2,6 +2,18 @@
 bin/
 obj/
 
+# Build outputs CheclLitsApp/
+CheclLitsApp/bin/
+CheclLitsApp/obj/
+
+# Build outputs AndroidApp/
+AndroidApp/bin/
+AndroidApp/obj/
+
+# Build outputs CheclLitsApp/
+CheclLitsApp1/bin/
+CheclLitsApp1/obj/
+
 # User-specific files
 .vs/
 *.user

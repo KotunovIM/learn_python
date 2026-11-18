@@ -1,14 +1,20 @@
 # Build outputs
-CheckListApp/.vs/
 CheckListApp/bin/
 CheckListApp/obj/
 
-checklist4/CheckListApp/.vs/
 checklist4/CheckListApp/bin/
 checklist4/CheckListApp/obj/
 
+android/AndroidApp_old/
+android/AndroidApp/bin/
+android/AndroidApp/obj/
+
+android/AndroidApp_old/
+android/AndroidApp_old/bin/
+android/AndroidApp_old/obj/
+
 # User-specific files
-CheckListApp/.vs/
+CheckListApp1/
 *.user
 *.suo
 

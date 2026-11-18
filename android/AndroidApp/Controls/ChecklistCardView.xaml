@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AndroidApp.Models"
+    x:Class="AndroidApp.Controls.ChecklistCardView"
+    x:DataType="models:Checklist">
+
+    <Border
+        StrokeThickness="1"
+        StrokeShape="RoundRectangle 12"
+        Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"
+        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkSecondaryBackground}}"
+        Padding="15">
+
+        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
+
+            <BoxView Grid.Row="0"
+                     HeightRequest="4"
+                     WidthRequest="40"
+                     HorizontalOptions="Start"
+                     CornerRadius="2"
+                     Color="{Binding AccentColor}" />
+
+            <Label Grid.Row="1"
+                   Text="{Binding Name}"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   LineBreakMode="TailTruncation"
+                   TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+
+            <Label Grid.Row="2"
+                   Text="{Binding Description}"
+                   FontSize="12"
+                   LineBreakMode="TailTruncation"
+                   MaxLines="3"
+                   VerticalOptions="Start"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
+        </Grid>
+    </Border>
+</ContentView>

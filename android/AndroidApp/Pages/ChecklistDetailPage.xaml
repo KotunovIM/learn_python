@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="AndroidApp.Pages.ChecklistDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AndroidApp.Models"
+    xmlns:pageModels="clr-namespace:AndroidApp.PageModels"
+    x:DataType="pageModels:ChecklistDetailPageModel"
+    x:Name="DetailPage"
+    Title="{Binding Checklist.Name}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="✏"
+                     Clicked="OnEditClicked"
+                     SemanticProperties.Description="Edit checklist" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="15" Padding="15">
+
+        <!-- Заголовок + описание -->
+        <VerticalStackLayout Grid.Row="0" Spacing="4">
+            <Label Text="{Binding Checklist.Name}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level1"
+                   TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+            <Label Text="{Binding Checklist.Description}"
+                   FontSize="13"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
+        </VerticalStackLayout>
+
+        <!-- Список действий -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Checklist.Items}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ChecklistItem">
+
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="Close">
+                                <SwipeItem Text="Удалить"
+                                           BackgroundColor="{StaticResource Magenta}"
+                                           Command="{Binding Path=BindingContext.RemoveItemCommand, Source={x:Reference DetailPage}, x:DataType=pageModels:ChecklistDetailPageModel}"
+                                           CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="0,6" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnItemTapped" />
+                            </Grid.GestureRecognizers>
+
+                            <!-- Кружок-чекбокс -->
+                            <Border Grid.Column="0"
+                                    WidthRequest="26"
+                                    HeightRequest="26"
+                                    StrokeThickness="2"
+                                    StrokeShape="RoundRectangle 6"
+                                    VerticalOptions="Center"
+                                    Stroke="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}"
+                                    BackgroundColor="Transparent">
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border" Binding="{Binding IsDone}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                        <Setter Property="Stroke" Value="{StaticResource Primary}" />
+                                    </DataTrigger>
+                                </Border.Triggers>
+
+                                <Label Text="✓"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       IsVisible="{Binding IsDone}" />
+                            </Border>
+
+                            <!-- Текст с зачёркиванием -->
+                            <Label Grid.Column="1"
+                                   Text="{Binding Text}"
+                                   FontSize="15"
+                                   VerticalOptions="Center"
+                                   TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="True">
+                                        <Setter Property="TextDecorations" Value="Strikethrough" />
+                                        <Setter Property="TextColor" Value="{StaticResource Gray400}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Label Grid.Column="2"
+                                   Text="→"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   TextColor="{StaticResource Gray400}" />
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" Spacing="8" Padding="20">
+                    <Label Text="В шаблоне пока нет действий"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+                    <Label Text="Добавьте первый пункт ниже."
+                           FontSize="13"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+        <!-- Добавление пункта -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <Entry Grid.Column="0"
+                   Text="{Binding NewItemText}"
+                   Placeholder="Новое действие…"
+                   FontSize="15"
+                   TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}"
+                   PlaceholderColor="{StaticResource Gray400}" />
+
+            <Button Grid.Column="1"
+                    Text="Добавить"
+                    Command="{Binding AddItemCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    FontSize="13"
+                    Padding="14,0" />
+        </Grid>
+    </Grid>
+</ContentPage>
