@@ -8,24 +8,13 @@
     Title="CheckListApp">
 
     <ShellContent
-        Title="Dashboard"
-        ContentTemplate="{DataTemplate pages:MainPage}"
-        Route="main"
-        SemanticProperties.Description="Dashboard"
-        SemanticProperties.Hint="Navigate to dashboard"/>
+        Title="Шаблоны"
+        ContentTemplate="{DataTemplate pages:TemplatesPage}"
+        Route="templates" />
 
     <ShellContent
-        Title="Projects"
-        ContentTemplate="{DataTemplate pages:ProjectListPage}"
-        Route="projects"
-        SemanticProperties.Description="Projects"
-        SemanticProperties.Hint="Navigate to projects"/>
-
-    <ShellContent
-        Title="Manage Meta"
-        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
-        Route="manage"
-        SemanticProperties.Description="Manage Meta"
-        SemanticProperties.Hint="Navigate to manage meta"/>
+        Title="Архив действий"
+        ContentTemplate="{DataTemplate pages:ArchivePage}"
+        Route="archive" />
 
 </Shell>

@@ -3,11 +3,11 @@ using AndroidApp.PageModels;
 
 namespace AndroidApp.Pages;
 
-public partial class MainPage : ContentPage
+public partial class TemplatesPage : ContentPage
 {
-    private readonly MainPageModel _model = new();
+    private readonly TemplatesPageModel _model = new();
 
-    public MainPage()
+    public TemplatesPage()
     {
         InitializeComponent();
         BindingContext = _model;
@@ -25,15 +25,6 @@ public partial class MainPage : ContentPage
         {
             await DisplayAlert("Ошибка инициализации", ex.Message, "OK");
         }
-    }
-
-    private async void OnFilterClicked(object sender, EventArgs e)
-    {
-        var options = _model.FilterOptions.ToArray();
-        var choice = await DisplayActionSheet("Режим", "Отмена", null, options);
-
-        if (choice is not null && _model.FilterOptions.Contains(choice))
-            _model.SelectedFilter = choice;
     }
 
     private async void OnChecklistSelected(object sender, SelectionChangedEventArgs e)

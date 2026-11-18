@@ -10,6 +10,16 @@ public static class ChecklistStore
     public static ObservableCollection<Checklist>      Checklists { get; } = new();
     public static ObservableCollection<ArchivedAction> Archive    { get; } = new();
 
+    //public static string CurrentFilter { get; private set; } = "Шаблонные";
+    //public static event Action? FilterChanged;
+
+   // public static void SetFilter(string filter)
+   // {
+   //     if (CurrentFilter == filter) return;
+   //     CurrentFilter = filter;
+   //     FilterChanged?.Invoke();
+   // }
+
     public static async Task InitAsync(string dbPath)
     {
         _db = new ChecklistDatabase(dbPath);
