@@ -11,11 +11,13 @@ public class TemplatesPageModel : INotifyPropertyChanged
 {
     private bool _initialized;
 
-    public ObservableCollection<Checklist> Templates { get; } = new();
+    public ObservableCollection<Checklist>      Templates     { get; } = new();
+    public ObservableCollection<ArchivedAction> RecentArchive { get; } = new();
 
     public ICommand AddChecklistCommand    { get; }
     public ICommand EditChecklistCommand   { get; }
     public ICommand DeleteChecklistCommand { get; }
+    public ICommand OpenArchiveCommand     { get; }
 
     public TemplatesPageModel()
     {
@@ -33,6 +35,9 @@ public class TemplatesPageModel : INotifyPropertyChanged
             if (c is null) return;
             await DeleteTemplateAsync(c);
         });
+
+        OpenArchiveCommand = new Command(async () =>
+            await Shell.Current.GoToAsync("//archive"));
     }
 
     public async Task InitAsync()
@@ -47,6 +52,10 @@ public class TemplatesPageModel : INotifyPropertyChanged
         Templates.Clear();
         foreach (var c in ChecklistStore.Checklists)
             Templates.Add(c);
+
+        RecentArchive.Clear();
+        foreach (var a in ChecklistStore.Archive.Take(20))
+            RecentArchive.Add(a);
     }
 
     private async Task DeleteTemplateAsync(Checklist c)
