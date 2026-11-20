@@ -8,13 +8,16 @@
 
     <Border
         StrokeThickness="1"
-        StrokeShape="RoundRectangle 12"
+        StrokeShape="RoundRectangle 16"
         Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"
-        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkSecondaryBackground}}"
-        Padding="15">
+        BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryBackground}, Dark={StaticResource DarkSecondaryBackground}}"
+        Padding="12"
+        WidthRequest="170"
+		HeightRequest="170">
 
-        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
+        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="6">
 
+            <!-- Акцентная полоска -->
             <BoxView Grid.Row="0"
                      HeightRequest="4"
                      WidthRequest="40"
@@ -22,20 +25,52 @@
                      CornerRadius="2"
                      Color="{Binding AccentColor}" />
 
+            <!-- Название -->
             <Label Grid.Row="1"
                    Text="{Binding Name}"
-                   FontSize="16"
+                   FontSize="15"
                    FontAttributes="Bold"
                    LineBreakMode="TailTruncation"
+                   MaxLines="1"
                    TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
 
-            <Label Grid.Row="2"
-                   Text="{Binding Description}"
-                   FontSize="12"
-                   LineBreakMode="TailTruncation"
-                   MaxLines="3"
-                   VerticalOptions="Start"
-                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
+            <!-- Мини-превью действий -->
+            <Grid Grid.Row="2" HeightRequest="70" VerticalOptions="Start">
+                <VerticalStackLayout Spacing="2"
+                                     BindableLayout.ItemsSource="{Binding Items}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:ChecklistItem">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="4">
+                                <Label Grid.Column="0"
+                                       Text="•"
+                                       FontSize="11"
+                                       VerticalOptions="Center"
+                                       TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding Text}"
+                                       FontSize="11"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="1"
+                                       VerticalOptions="Center"
+                                       TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Счётчик -->
+            <Label Grid.Row="3"
+                   FontSize="10"
+                   TextColor="{Binding AccentColor}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Всего " />
+                        <Span Text="{Binding Items.Count}" />
+                        <Span Text=" действий" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </Grid>
     </Border>
 </ContentView>

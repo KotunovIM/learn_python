@@ -23,52 +23,54 @@
                TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
 
         <Label Grid.Row="1"
-               Text="My Checklists"
+               Text="Шаблоны действий"
                FontSize="26"
                FontAttributes="Bold"
                SemanticProperties.HeadingLevel="Level1"
                TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
 
-        <CollectionView Grid.Row="2"
-                        x:Name="ChecklistsCollectionView"
-                        ItemsSource="{Binding Templates}"
-                        Margin="-7.5,0"
-                        MinimumHeightRequest="250"
-                        SelectionMode="Single"
-                        SelectionChanged="OnChecklistSelected">
+        <!-- ▼▼▼ Горизонтальная лента, прижата к верху ▼▼▼ -->
+<CollectionView Grid.Row="2"
+                x:Name="ChecklistsCollectionView"
+                ItemsSource="{Binding Templates}"
+                SelectionMode="Single"
+                SelectionChanged="OnChecklistSelected"
+                HeightRequest="180"
+                VerticalOptions="Start">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="7.5" />
-            </CollectionView.ItemsLayout>
+    <CollectionView.ItemsLayout>
+        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+    </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Checklist">
-                    <SwipeView>
-                        <SwipeView.BottomItems>
-                            <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="Close">
-                                <SwipeItem Text="Изменить"
-                                           BackgroundColor="{StaticResource Primary}"
-                                           Command="{Binding Path=BindingContext.EditChecklistCommand, Source={x:Reference RootPage}, x:DataType=pageModels:TemplatesPageModel}"
-                                           CommandParameter="{Binding .}" />
-                                <SwipeItem Text="Удалить"
-                                           BackgroundColor="{StaticResource Magenta}"
-                                           Command="{Binding Path=BindingContext.DeleteChecklistCommand, Source={x:Reference RootPage}, x:DataType=pageModels:TemplatesPageModel}"
-                                           CommandParameter="{Binding .}" />
-                            </SwipeItems>
-                        </SwipeView.BottomItems>
+    <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="models:Checklist">
+            <SwipeView>
+                <SwipeView.BottomItems>
+                    <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="Close">
+                        <SwipeItem Text="Изменить"
+                                   BackgroundColor="{StaticResource Primary}"
+                                   Command="{Binding Path=BindingContext.EditChecklistCommand, Source={x:Reference RootPage}, x:DataType=pageModels:TemplatesPageModel}"
+                                   CommandParameter="{Binding .}" />
+                        <SwipeItem Text="Удалить"
+                                   BackgroundColor="{StaticResource Magenta}"
+                                   Command="{Binding Path=BindingContext.DeleteChecklistCommand, Source={x:Reference RootPage}, x:DataType=pageModels:TemplatesPageModel}"
+                                   CommandParameter="{Binding .}" />
+                    </SwipeItems>
+                </SwipeView.BottomItems>
 
-                        <controls:ChecklistCardView WidthRequest="200" />
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                <controls:ChecklistCardView WidthRequest="160" HeightRequest="160" />
+            </SwipeView>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
 
-            <CollectionView.EmptyView>
-                <Label Text="Нет шаблонов. Нажмите «+» чтобы создать."
-                       FontSize="14"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
-            </CollectionView.EmptyView>
-        </CollectionView>
-    </Grid>
+    <CollectionView.EmptyView>
+        <Label Text="Нет шаблонов. Нажмите «+» чтобы создать."
+               FontSize="14"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,30,0,0"
+               TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
+    </CollectionView.EmptyView>
+	</CollectionView>
+</Grid>
 </ContentPage>
