@@ -5,10 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:AndroidApp.Pages"
     Shell.FlyoutBehavior="Flyout"
-    Title="Шаблоны действий">
+    Title="CheckListApp">
+
+    <!-- Простой заголовок, который точно работает -->
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="80" Padding="16" BackgroundColor="{StaticResource Primary}">
+            <Label Text="CheckListApp"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
 
     <ShellContent
-        Title="Шаблоны"
+        Title="Шаблоны действий"
         ContentTemplate="{DataTemplate pages:TemplatesPage}"
         Route="templates" />
 

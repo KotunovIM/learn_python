@@ -17,22 +17,16 @@
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="12" Padding="15">
 
-        <!-- 1. Приветствие -->
-        <Label Grid.Row="0"
-               Text="Добрый день 👋"
-               FontSize="14"
-               TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource LightOnDarkBackground}}" />
-
         <!-- 2. Заголовок -->
-        <Label Grid.Row="1"
-               Text="My Checklists"
+        <Label Grid.Row="0"
+               Text="Шаблоны действий"
                FontSize="26"
                FontAttributes="Bold"
                SemanticProperties.HeadingLevel="Level1"
                TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
 
         <!-- 3. Горизонтальная лента шаблонов -->
-        <CollectionView Grid.Row="2"
+        <CollectionView Grid.Row="1"
                         x:Name="ChecklistsCollectionView"
                         ItemsSource="{Binding Templates}"
                         SelectionMode="Single"
@@ -76,7 +70,7 @@
         </CollectionView>
 
         <!-- 4. Заголовок «Последние действия» — тап открывает архив -->
-        <Grid Grid.Row="3"
+        <Grid Grid.Row="2"
               ColumnDefinitions="*,Auto"
               Margin="0,10,0,0">
 
@@ -99,7 +93,7 @@
         </Grid>
 
         <!-- 5. Сетка последних 20 записей архива -->
-        <CollectionView Grid.Row="4"
+        <CollectionView Grid.Row="3"
                         ItemsSource="{Binding RecentArchive}"
                         SelectionMode="None"
                         VerticalOptions="Start">
