@@ -4,7 +4,8 @@ using System.Text;
 
 namespace CheckApps.PageModels
 {
-    internal class ArchivePageModel
+    public partial class ArchivePageModel
     {
+     
     }
 }

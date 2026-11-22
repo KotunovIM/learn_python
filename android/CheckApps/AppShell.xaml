@@ -14,7 +14,7 @@
         <Tab Title="Архив" >
             <ShellContent
          Route="arhiv"
-         ContentTemplate="{DataTemplate pages:TemplatesPage}" />
+         ContentTemplate="{DataTemplate pages:ArchivePage}" />
         </Tab>
         <!-- Позже здесь можно добавить новые вкладки -->
     </TabBar>
